@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stranger Code Competition Timer</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    #timer {
+      font-size: 300px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a30000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- <h1>Stranger Code Competition Timer</h1> -->
+    <img style="width: 700px;" src="img/logo2.png" alt="hi">
+    <div id="timer">
+      <span id="minutes">30</span>:<span id="seconds">00</span>
+    </div>
+    <button id="startButton" onclick="startTimer()">Start</button>
+    <button id="pauseButton" onclick="pauseTimer()">Pause</button>
+    <button id="resetButton" onclick="resetTimer()">Reset</button>
+  </div>
+
+  <script>
+    let timer;
+    let minutes = 30;
+    let seconds = 0;
+
+    function startTimer() {
+      timer = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      if (seconds > 0) {
+        seconds--;
+      } else {
+        if (minutes == 0) {
+          clearInterval(timer);
+          alert("Time's up!");
+          return;
+        }
+        minutes--;
+        seconds = 59;
+      }
+      document.getElementById("minutes").innerText = formatTime(minutes);
+      document.getElementById("seconds").innerText = formatTime(seconds);
+    }
+
+    function formatTime(time) {
+      return time < 10 ? "0" + time : time;
+    }
+
+    function pauseTimer() {
+      clearInterval(timer);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      minutes = 30;
+      seconds = 0;
+      document.getElementById("minutes").innerText = "30";
+      document.getElementById("seconds").innerText = "00";
+    }
+  </script>
+</body>
+</html>
